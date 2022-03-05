@@ -2,9 +2,14 @@ package com.codepath.debuggingchallenges.activities
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Layout
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.codepath.debuggingchallenges.R
+
+private const val TAG = "ChangeBackground"
 
 class ChangeBackgroundActivity : AppCompatActivity() {
     private var oldColor = Color.BLUE

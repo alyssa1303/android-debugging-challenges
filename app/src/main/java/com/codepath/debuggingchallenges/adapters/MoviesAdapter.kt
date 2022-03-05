@@ -1,6 +1,7 @@
 package com.codepath.debuggingchallenges.adapters
 
 import android.graphics.Color
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
 import com.codepath.debuggingchallenges.R
@@ -11,6 +12,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.codepath.debuggingchallenges.models.Movie
 
+private const val TAG = "MoviesAdapter"
 class MoviesAdapter(private val movies: List<Movie>?) : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
     inner class ViewHolder(  // only needed because we need to set the background color
             var view: View) : RecyclerView.ViewHolder(view) {
@@ -21,7 +23,7 @@ class MoviesAdapter(private val movies: List<Movie>?) : RecyclerView.Adapter<Mov
     }
 
     override fun getItemCount(): Int {
-        return 0
+        return movies?.size ?: 0
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,11 +33,13 @@ class MoviesAdapter(private val movies: List<Movie>?) : RecyclerView.Adapter<Mov
         // Inflate the custom layout
         val movieView = inflater.inflate(R.layout.item_movie, parent, false)
 
+        Log.i(TAG, "onCreateViewHolder")
         // Return a new holder instance
         return ViewHolder(movieView)
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        Log.i(TAG, "movie $movies")
         if (movies != null) {
             val movie = movies[position]
 
@@ -44,6 +48,7 @@ class MoviesAdapter(private val movies: List<Movie>?) : RecyclerView.Adapter<Mov
             viewHolder.tvName.text = movie.title
             val resources = viewHolder.tvName.resources
             val movieRating = movie.rating
+            Log.i(TAG, "rating $movieRating")
             if (movieRating > 6) {
                 viewHolder.view.setBackgroundColor(Color.GREEN)
             }
